@@ -1,0 +1,14 @@
+.card_deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px;
+justify-items: center;
+}
+.a_card {
+  width: 200px;
+  border: 1px solid gray;
+  background-color: rgb(202, 248, 233);
+  padding: 10px;
+}
+
