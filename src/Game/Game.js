@@ -7,24 +7,30 @@ import shuffle from "./shuffle.js";
 const Game = (props) => {
   const cards = props.cards;
   const setCards = props.setCards;
+  const setGameOver = props.setGameOver;
 
   const check = (card) => {
     if (card.checked === true) {
-      props.restart();
+      setCards(shuffle(cards));
+      setGameOver(true);
     } else {
       props.incrementScore(1);
       let cardIndex = cards.findIndex((obj) => obj === card);
       const oldCards = [...cards];
       oldCards[cardIndex].checked = true;
       setCards(oldCards);
+      setCards(shuffle(cards));
     }
   };
 
+  useEffect(() => {
+    let newCards = shuffle(cards);
+    setCards(newCards);
+  }, [cards]);
 
   return (
     <div className="card_deck">
       {cards.map((card) => {
-        console.log(card);
         return (
           <div
             className="a_card"
@@ -35,7 +41,6 @@ const Game = (props) => {
           >
             <h2>{card.name}</h2>
             <img alt={`a ${card.name}`} src={card.src}></img>
-            {/* {card.checked === true && <h3>Yes</h3>} */}
           </div>
         );
       })}

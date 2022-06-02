@@ -12,7 +12,7 @@ const getCards = () => {
   const fetchPokemon = async () => {
     arrayOfPokemonIDS.map(async (id) => {
       await fetch("https://pokeapi.co/api/v2/pokemon/" + id)
-        .then(function (res) {
+        .then(await function (res) {
           return res.json();
         })
         .then(function (res) {
