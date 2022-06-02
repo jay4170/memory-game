@@ -7,7 +7,7 @@ import shuffle from "./shuffle.js";
 const Game = (props) => {
   const cards = props.cards;
   const setCards = props.setCards;
-console.log(cards);
+
   const check = (card) => {
     if (card.checked === true) {
       props.restart();
@@ -20,16 +20,11 @@ console.log(cards);
     }
   };
 
-  useEffect(() => {
-      console.log("Cards changed");
-
-    setCards(shuffle(cards));
-  }, [cards]);
 
   return (
     <div className="card_deck">
       {cards.map((card) => {
-          console.log(card);
+        console.log(card);
         return (
           <div
             className="a_card"

@@ -5,11 +5,10 @@ import logo from "./images/pokemon-logo-png-0.png";
 import shuffle from "./Game/shuffle";
 import getCards from "./Game/getCards";
 
-
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cards, setCards] = useState(shuffle(getCards));
+  const [cards, setCards] = useState(getCards());
 
   const incrementScore = (increment) => {
     console.log("Incrementing");
@@ -19,19 +18,24 @@ function App() {
   const start = () => {
     setCurrentScore(0);
     console.log("Start");
-    setCards(shuffle(getCards()));
+    setCards(getCards());
   };
+
   useEffect(() => {
     if (currentScore > bestScore) {
       console.log("Setting best Score");
       setBestScore(currentScore);
     }
-    if (currentScore === cards.length) {
+    if (currentScore === 12) {
       console.log("completed");
-      alert("Completed")
+      alert("Completed");
       start();
     }
-  }, [currentScore, bestScore]);
+  }, [currentScore]);
+
+  useEffect(() => {
+    setCards(shuffle(cards));
+  }, [cards]);
 
   return (
     <div className="App">
