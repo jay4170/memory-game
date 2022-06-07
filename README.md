@@ -2,7 +2,7 @@
 
 Simple memory game
 
-* [Live Preview]([www.theodinproject.com](https://jay4170.github.io/memory-game/))
+[Live Preview](https://jay4170.github.io/memory-game/)
 
 
 ## Description
