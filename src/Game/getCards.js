@@ -1,37 +1,67 @@
-import getDummyCards from "./dummyCards";
-
-const getCards = () => {
-  let arrayOfPokemonIDS = [];
-  let arrayOfPokemonDetails = [];
-
-  //get an array of non duplicate numbers
-  while (arrayOfPokemonIDS.length < 12) {
-    arrayOfPokemonIDS.push(Math.floor(Math.random() * 800));
-  }
-  //for each entry in pokemon IDS fetch from the api and return the pokemon data
-  const fetchPokemon = async () => {
-    arrayOfPokemonIDS.map(async (id) => {
-      await fetch("https://pokeapi.co/api/v2/pokemon/" + id)
-        .then(await function (res) {
-          return res.json();
-        })
-        .then(function (res) {
-          let mon = {
-            name: res.name,
-            src: res.sprites.front_default,
-            checked: false,
-          };
-
-          arrayOfPokemonDetails.push(mon);
-        });
-    });
-  };
-  fetchPokemon();
-
-  console.log("running getCards");
-  console.log(arrayOfPokemonDetails);
-
-  return arrayOfPokemonDetails;
-//   return getDummyCards();
+const getCards = (number) => {
+  const cards = [
+    {
+      name: "Medicham",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/308.png",
+      checked: false,
+    },
+    {
+      name: "Noivern",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/715.png",
+      checked: false,
+    },
+    {
+      name: "Golbat",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
+      checked: false,
+    },
+    {
+      name: "Raticate",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
+      checked: false,
+    },
+    {
+      name: "Keldeo-Ordinary",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/647.png",
+      checked: false,
+    },
+    {
+      name: "Spheal",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/363.png",
+      checked: false,
+    },
+    {
+      name: "Darmanitan-Standard",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/555.png",
+      checked: false,
+    },
+    {
+      name: "Sandslash",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png",
+      checked: false,
+    },
+    {
+      name: "Duosion",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/578.png",
+      checked: false,
+    },
+    {
+      name: "Azelf",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/482.png",
+      checked: false,
+    },
+    {
+      name: "Gible",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/443.png",
+      checked: false,
+    },
+    {
+      name: "Girafarig",
+      src: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/203.png",
+      checked: false,
+    },
+  ];
+  return cards;
 };
+
 export default getCards;

@@ -1,9 +1,31 @@
 .App {
   text-align: center;
 }
-
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .inTextLogo {
+  position:static;
   height: 100px;
-  margin: 0;
-  padding: 0;
+  margin-bottom:10px;
+}
+.game_board {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  padding: 0%;
+}
+.button {
+  background-color: #ffcd02;
+  border: 4px solid #295be0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 20%;
 }

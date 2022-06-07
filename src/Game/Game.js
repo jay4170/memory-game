@@ -1,18 +1,16 @@
-import { useEffect } from "react";
-import getDummyCards from "./dummyCards";
 import { v4 as uuidv4 } from "uuid";
 import "./Game.css";
+import getCards from "./getCards";
 import shuffle from "./shuffle.js";
 
 const Game = (props) => {
   const cards = props.cards;
   const setCards = props.setCards;
-  const setGameOver = props.setGameOver;
 
   const check = (card) => {
     if (card.checked === true) {
-      setCards(shuffle(cards));
-      setGameOver(true);
+      props.restart();
+      setCards(getCards());
     } else {
       props.incrementScore(1);
       let cardIndex = cards.findIndex((obj) => obj === card);
@@ -22,11 +20,6 @@ const Game = (props) => {
       setCards(shuffle(cards));
     }
   };
-
-  useEffect(() => {
-    let newCards = shuffle(cards);
-    setCards(newCards);
-  }, [cards]);
 
   return (
     <div className="card_deck">
@@ -40,7 +33,7 @@ const Game = (props) => {
             key={uuidv4()}
           >
             <h2>{card.name}</h2>
-            <img alt={`a ${card.name}`} src={card.src}></img>
+            <img className="card_image" alt={`a ${card.name}`} src={card.src}></img>
           </div>
         );
       })}

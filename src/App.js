@@ -1,66 +1,44 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import getCards from "./Game/getCards";
 import Game from "./Game/Game";
 import logo from "./images/pokemon-logo-png-0.png";
-// import shuffle from "./Game/shuffle";
+import shuffle from "./Game/shuffle";
 // import getCards from "./Game/getCards";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cards, setCards] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
+  const [cards, setCards] = useState(shuffle(getCards()));
 
-  useEffect(() => {
-    let arrayOfPokemonIDS = [];
-    let tempArray = [];
-    while (arrayOfPokemonIDS.length < 12) {
-      arrayOfPokemonIDS.push(Math.floor(Math.random() * 800));
-    }
-
-    arrayOfPokemonIDS.forEach(async (id) => {
-      (async () => {
-        const APIdata = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
-        const res = await APIdata.json();
-        let mon = {
-          name: res.name,
-          src: res.sprites.front_default,
-          checked: false,
-        };
-
-        tempArray.push(mon);
-        setCards(tempArray);
-      })();
-    });
-  }, [gameOver]);
-
+  
+  const restart = () => {
+    console.log("restart function");
+    setCurrentScore(0);
+    setCards(shuffle(getCards()));
+  };
+  //Increments the score on a successful selection
   const incrementScore = (increment) => {
     console.log("Incrementing");
     setCurrentScore(currentScore + increment);
   };
 
-  const start = () => {
-    setGameOver(false);
-    setCurrentScore(0);
-    console.log("restart");
-  };
-
+  //manages the scores
   useEffect(() => {
     if (currentScore > bestScore) {
-      console.log("Setting best Score");
       setBestScore(currentScore);
     }
     if (currentScore === 12) {
-      console.log("completed");
-      setGameOver(true);
       alert("Completed");
-      start();
+      restart();
     }
-  }, [currentScore]);
+  }, [currentScore, bestScore]);
 
-  // useEffect(() => {
-  //   setCards(shuffle(cards));
-  // }, [cards]);
+  //When the card state has been changed at all, shuffle
+  useEffect(() => {
+    let newCards = shuffle(cards);
+    setCards(newCards);
+  }, [cards]);
 
   return (
     <div className="App">
@@ -71,16 +49,18 @@ function App() {
         </h2>
         <h3>Current Score: {currentScore}</h3>
         <h3>Best Score {bestScore}</h3>
-        <button onClick={start}>Reset Game</button>
+        <button className="button" onClick={restart}>
+          Reset Game
+        </button>
       </div>
-      <Game
-      setGameOver={setGameOver}
-        cards={cards}
-        setCards={setCards}
-        incrementScore={incrementScore}
-        restart={start}
-      />
-      <div>Footer</div>
+      <div className="game_board">
+        <Game
+          cards={cards}
+          setCards={setCards}
+          incrementScore={incrementScore}
+          restart={restart}
+        />
+      </div>
     </div>
   );
 }
